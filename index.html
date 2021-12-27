@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Praktikum 7</title>
+</head>
+<style>
+
+    .flex-container{
+        text-align: center;
+        color: #d44ea1;
+    }
+
+    img.image{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 400px;
+    height: 200px;
+  }
+  .container {
+    margin-left: 10px;
+    margin-right: 10px;
+    padding: 5px;
+  }
+  
+  .index{
+    padding: 15px;
+    text-align:center;
+  }
+
+  .list_province{
+      text-align:center;
+      padding:10px;
+  }
+
+  .container-fluid{
+    text-align:center;
+  }
+  
+  .darkMode {
+    background-color: #161515;
+    color: rgb(214, 173, 84);
+  }
+
+
+</style>
+<body>
+    <div class="flex-container">
+        <h1>Provinces and Cities in Indonesian</h1>
+        <img src="peta.png" class="image">
+    </div>
+
+    <div class="list_province">
+        <select class="list_city" id="Province" onchange="selectCity()">
+          <option selected disabled>Select Province</option>
+          <option value="Riau">Riau</option>
+          <option value="DKI_Jakarta">DKI Jakarta</option>
+          <option value="Jawa_Timur">Jawa Timur</option>
+          <option value="Jawa_Barat">Jawa Barat</option>
+        </select>
+      </div>
+
+      <div class="list_province">
+        <select class="list_city" id="City" onchange="outputCity()">
+          <option selected disabled>Select City</option>
+          <option value="" disabled>-</option>
+        </select>
+      </div>
+    </div>
+        <h2 class="index" id="Output"></h2>
+      </div>
+    </div>
+  </div>
+  <div class="container" id="container">
+      <nav class="navbar" id="nav">
+        <div class="container-fluid">
+          <button class="tombol" type="button" id="button" onclick="darkMode()">Dark Mode</button>
+        </div>
+      </nav>
+    </div>
+
+<script>
+    const Province = document.getElementById("Province");
+    const City = document.getElementById("City");
+    const arrCity = {
+      Riau: ["Bengkalis", "Kampar", "Kepulauan Meranti", "Indragiri Hilir","Indragiri Hulu","Indragiri Hilir"],
+      DKI_Jakarta: ["Jakarta Barat", "Jakarta Timur", "Jakarta Selatan", "Jakarta Utara","Jakarta Pusat"],
+      Jawa_Timur: ["Bondowoso", "Banyuwangi", "Bojonegoro", "Blitar", "Jember","Jombang"],
+      Jawa_Barat: ["Bandung", "Bogor", "Bekasi", "Cirebon", "Depok", "Sukabumi"],
+    };
+
+    function selectCity() {
+      const ProvinceVal = Province.value;
+      if (ProvinceVal === "Riau") {
+        City.innerHTML = "<option selected disabled>Select City</option>";
+        for (let i = 0; i < arrCity["Riau"].length; i++) {
+          City.innerHTML += `<option value="${arrCity["Riau"][i]}">${arrCity["Riau"][i]}</option>`;
+        }
+      } else if (ProvinceVal === "DKI_Jakarta") {
+        City.innerHTML = "<option selected disabled>Select City</option>";
+        for (let i = 0; i < arrCity["DKI_Jakarta"].length; i++) {
+          City.innerHTML += `<option value="${arrCity["DKI_Jakarta"][i]}">${arrCity["DKI_Jakarta"][i]}</option>`;
+        }
+      } else if (ProvinceVal === "Jawa_Timur") {
+        City.innerHTML = "<option selected disabled>Select City</option>";
+        for (let i = 0; i < arrCity["Jawa_Timur"].length; i++) {
+          City.innerHTML += `<option value="${arrCity["Jawa_Timur"][i]}">${arrCity["Jawa_Timur"][i]}</option>`;
+        }
+      } else if (ProvinceVal === "Jawa_Barat") {
+        City.innerHTML = "<option selected disabled>Select City</option>";
+        for (let i = 0; i < arrCity["Jawa_Barat"].length; i++) {
+          City.innerHTML += `<option value="${arrCity["Jawa_Barat"][i]}">${arrCity["Jawa_Barat"][i]}</option>`;
+        }
+      } 
+    }
+
+    function outputCity() {
+      const ProvinceVal = document.getElementById("Province").value;
+      const CityVal = document.getElementById("City").value;
+      const result = document.getElementById("Output");
+      result.innerText = `In Province ${ProvinceVal} there is City ${CityVal}`;
+    }
+
+    function darkMode() {
+      const darkMode = document.body.classList.toggle("darkMode");
+      const container = document.getElementsByClassName("container");
+      container[0].classList.toggle("darkContainer");
+      container[1].classList.toggle("darkContainer");
+      const navBar = document.getElementById("nav");
+      const button = document.getElementById("button");
+
+      if (darkMode == true) {
+        button.innerHTML = "Light Mode";
+        button.classList.replace("btn-outline-dark", "btn-outline-dark");
+        navBar.classList.replace("navbar-light", "navbar-light");
+        navBar.classList.replace("bg-light", "bg-light");
+      } else {
+        button.innerHTML = "Dark Mode";
+        button.classList.replace("btn-outline-light", "btn-outline-light");
+        navBar.classList.replace("navbar-dark", "navbar-dark");
+        navBar.classList.replace("bg-dark", "bg-dark");
+      }
+    }
+
+  </script>
+</body>
+</html>
